@@ -44,6 +44,7 @@ class CompanyController extends Controller
     }
 
     public function updateCompany(Company $company){
+        $this->deleteCompany($company);  //pridejau del validacijos Err. nes su unique neatnaujina
         return view('pages.update-company',compact('company'));
     }
 

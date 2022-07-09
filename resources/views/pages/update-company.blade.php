@@ -3,6 +3,7 @@
     <div class="container">
         <h2 class="mb-4">Atnaujinti informaciją apie įmonę</h2>
         @include('_partials/errors')
+{{--        <form action="/update/{{$company->id}}" method="post" enctype="multipart/form-data">--}}
         <form action="/update/{{$company->id}}" method="post" enctype="multipart/form-data">
             @csrf
             <div class="form-group mb-4">

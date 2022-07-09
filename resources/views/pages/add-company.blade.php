@@ -23,10 +23,10 @@
             <div class="form-group mb-4">
                 <textarea name="description"  id="" cols="30" rows="3" placeholder="Įmonės aprašymas" class="form-control"></textarea>
             </div>
-            <div class="form-group mb-4">
-                <label>Logotipas</label>
-                <input type="file" name="logo" class="form-control">
-            </div>
+{{--            <div class="form-group mb-4">--}}
+{{--                <label>Logotipas</label>--}}
+{{--                <input type="file" name="logo" class="form-control">--}}
+{{--            </div>--}}
             <button type="submit" class="btn btn-primary mb-4">Saugoti</button>
         </form>
     </div>

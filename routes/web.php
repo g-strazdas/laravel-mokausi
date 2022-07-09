@@ -21,4 +21,5 @@ Route::get('/add-company',[CompanyController::class, 'addCompany']);
 Route::post('/store', [CompanyController::class, 'store']);
 Route::get('/imone/{company}',[CompanyController::class, 'showCompany']);
 Route::get('/imone/delete/{company}',[CompanyController::class, 'deleteCompany']);
-Route::get('/update/{company}',[CompanyController::class, 'updateCompany']);
+Route::get('/imone/update/{company}',[CompanyController::class, 'updateCompany']);
+Route::get('/update/{company}',[CompanyController::class, 'storeUpdate']);
