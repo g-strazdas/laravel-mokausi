@@ -23,3 +23,8 @@ Route::get('/imone/{company}',[CompanyController::class, 'showCompany']);
 Route::get('/imone/delete/{company}',[CompanyController::class, 'deleteCompany']);
 Route::get('/imone/update/{company}',[CompanyController::class, 'updateCompany']);
 Route::post('/update/{company}',[CompanyController::class, 'storeUpdate']);
+
+Auth::routes();
+Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+

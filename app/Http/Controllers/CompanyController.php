@@ -4,11 +4,18 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Company;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Gate;
 
 class CompanyController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth',['except'=>['index','showCompany']]);
+    }
+
     public function index (){
         $companies = Company::all();
         return view('pages.home', compact('companies'));
@@ -42,7 +49,8 @@ class CompanyController extends Controller
             'address'=>request('address'),
             'director'=>request('director'),
             'description'=>request('description'),
-            'logo'=>$fileName
+            'logo'=>$fileName,
+            'user_id'=> Auth::id()
         ]);
         return redirect('/');
 
@@ -58,7 +66,9 @@ class CompanyController extends Controller
     }
 
     public function updateCompany(Company $company){
-
+        if(Gate::denies('edit-company',$company)){
+            dd('Tu neturi teisės atlikti šį veiksmą');
+        }
         return view('pages.update-company',compact('company'));
     }
 

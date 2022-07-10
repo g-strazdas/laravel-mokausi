@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('director');
             $table->longText('description');
             $table->string('logo')->nullable();
+            $table->integer('user_id');
             $table->timestamps();
         });
     }
