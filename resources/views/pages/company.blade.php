@@ -2,6 +2,11 @@
 @section('content')
     <div class="container">
         <h1 class="mt-4">{{$company->company}}</h1>
+        <div class="logo">
+            <img src="{{asset('/storage/images/'.$company->logo)}}" alt="">
+{{--            {{dd(asset('/storage/images/'.$company->logo))}}--}}
+        </div>
+
         <h3>Kita informacija apie įmonę:</h3>
         <ul>
             <li>{{$company->code}}</li>

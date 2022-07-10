@@ -4,12 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Company;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 class CompanyController extends Controller
 {
     public function index (){
         $companies = Company::all();
         return view('pages.home', compact('companies'));
+
     }
 
     public function addCompany(){
@@ -19,8 +22,18 @@ class CompanyController extends Controller
     public function store(Request $request){
         $validated = $request->validate([
             'company'=>'required|unique:companies|max:255',
-            'code'=>'required'
+            'code'=>'required',
+            'logo'=>'mimes:jpeg,jpg,png,gif'
         ]);
+
+        if(request()->hasFile('logo')) {
+            $path = $request->file('logo')->store('public/images');
+            $fileName = str_replace('public/images/', '', $path);
+            //pakeista (buvo 'public'), kad nesaugoti į db formatu images/failoPavadinimas.jpg
+//          //pakeista ir company.blade.php <img src="{{asset('/storage/images/'.$company->logo)}}" alt="">
+            //jei po ddev artisan storage:link komandos nerodo img - ištrinti public/storage failą ir
+            //komandą pakartoti.
+        }
 
         Company::create([
             'company'=>request('company'),
@@ -28,7 +41,8 @@ class CompanyController extends Controller
             'vat'=>request('vat'),
             'address'=>request('address'),
             'director'=>request('director'),
-            'description'=>request('description')
+            'description'=>request('description'),
+            'logo'=>$fileName
         ]);
         return redirect('/');
 
@@ -44,7 +58,7 @@ class CompanyController extends Controller
     }
 
     public function updateCompany(Company $company){
-        $this->deleteCompany($company);  //pridejau del validacijos Err. nes su unique neatnaujina
+
         return view('pages.update-company',compact('company'));
     }
 
